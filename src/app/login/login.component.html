@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col sm-4"></div>
+    <div class="col sm-4">
+        <h2>User Login</h2>
+        <form [formGroup]="loginForm" (submit)="userLogin()">
+            <div class="mb-3">
+                <input formControlName="username" class="form-control" placeholder="Username">
+                @if (loginStatus && username?.errors) {
+                    <div class="text-danger">Username is empty!</div>
+                }
+            </div>
+            <div class="mb-3">
+                <input formControlName="password" type="password" class="form-control" placeholder="Password">
+                @if (loginStatus && password?.errors) {
+                    <div class="text-danger">Password is empty!</div>
+                }
+            </div>
+        <button class="btn btn-success">Send</button>
+    </form>
+    </div>
+    <div class="col sm-4"></div>
+</div>
