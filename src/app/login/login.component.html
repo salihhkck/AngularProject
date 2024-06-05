@@ -1,22 +1,27 @@
 <div class="row">
-    <div class="col sm-4"></div>
-    <div class="col sm-4">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
         <h2>User Login</h2>
-        <form [formGroup]="loginForm" (submit)="userLogin()">
+        @if (loginError != '') {
+            <div class="alert alert-danger" role="alert">
+                {{ loginError }}
+            </div>
+        }
+        <form [formGroup]="loginForm" (submit)="userLogin()" >
             <div class="mb-3">
-                <input formControlName="username" class="form-control" placeholder="Username">
-                @if (loginStatus && username?.errors) {
-                    <div class="text-danger">Username is empty!</div>
+                <input formControlName="username" class="form-control" placeholder="Username" />
+                @if (loginStatus && username?.errors?.['required']) {
+                    <div class="text-danger">Username Empty!</div>
                 }
             </div>
             <div class="mb-3">
-                <input formControlName="password" type="password" class="form-control" placeholder="Password">
+                <input formControlName="password" type="password" class="form-control" placeholder="Password" />
                 @if (loginStatus && password?.errors) {
-                    <div class="text-danger">Password is empty!</div>
+                    <div class="text-danger">Password Empty!</div>
                 }
             </div>
-        <button class="btn btn-success">Send</button>
-    </form>
+            <button class="btn btn-success">Send</button>
+        </form>
     </div>
-    <div class="col sm-4"></div>
+    <div class="col-sm-4"></div>
 </div>
