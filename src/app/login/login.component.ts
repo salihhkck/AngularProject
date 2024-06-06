@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { login_url } from '../../utils/util';
 import { IUser } from '../../models/IUser';
-import { getUser, setUser } from '../../utils/userStore';
 import { Router } from '@angular/router';
+import { CryptoService } from '../services/crypto.service';
 
 
 @Component({
@@ -18,8 +18,13 @@ export class LoginComponent {
 
   loginStatus = false
   loginError = ''
-  constructor( private fb:FormBuilder, private http: HttpClient, private router: Router ) {
-    const user = getUser()
+  constructor(
+     private fb:FormBuilder,
+     private http: HttpClient, 
+     private router: Router,
+     private crypto:CryptoService
+    ) {
+    const user = this.crypto.getUser()
     if (user) {
       console.log(user)
     }
@@ -66,7 +71,7 @@ export class LoginComponent {
     const newThis = this
     this.http.post<IUser>(login_url, sendObj).subscribe({
       next(res) {
-        setUser(res)
+        newThis.crypto.setUser(res)
         newThis.router.navigate(['/dashboard'])
       },
       error(err) {
