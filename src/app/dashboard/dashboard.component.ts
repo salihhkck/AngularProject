@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Product } from '../../models/IAllProducts';
 import { RouterLink } from '@angular/router';
+import { HeaderComponent } from '../inc/header/header.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, HeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
