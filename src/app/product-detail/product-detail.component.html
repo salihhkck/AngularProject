@@ -1,0 +1,23 @@
+@if (product) 
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>{{product.title}}</h2>
+            <p>{{product.description}}</p>
+            <p>{{product.category}}</p>
+            <p>{{product.price}}</p>
+            <img src={{product.meta.qrCode}} class="img-thumbnail" width="150"/>
+
+
+        </div>
+        <div class="col-sm-6">
+            <img src={{bigImagePath}} class="img-fluid"/> 
+            <div class="mt-3">
+                @for (url of product.images; track $index) {
+                    <img role="button" (click)="bigImageChange(url)" src={{url}} class="img-thumbnail" width="125"/>
+                }
+            </div>  
+        </div>    
+    
+    </div>
+}

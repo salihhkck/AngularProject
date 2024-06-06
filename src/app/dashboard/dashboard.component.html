@@ -13,16 +13,16 @@
     
       @if (products.length > 0) {
         @for (item of products; track $index) {
-            <tr (click)="singleSelectItem($index)" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <th scope="row">{{ item.id }}</th>
-                <td>{{ item.title }}</td>
-                <td>{{item.category}}</td>
-                <td>{{item.price}}</td>
-                <td>
+            <tr (click)="singleSelectItem($index)" role="button">
+                <th  data-bs-toggle="modal" data-bs-target="#exampleModal" scope="row" >{{ item.id }}</th>
+                <td  data-bs-toggle="modal" data-bs-target="#exampleModal" >{{ item.title }}</td>
+                <td  data-bs-toggle="modal" data-bs-target="#exampleModal">{{item.category}}</td>
+                <td  data-bs-toggle="modal" data-bs-target="#exampleModal">{{item.price}}</td>
+                <td  data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src={{item.thumbnail}} class="img-thumbnail" width="90" />
                 </td>
                 <td>
-                    <a href="" class="btn btn-outline-secondary">Detail</a>
+                    <a [routerLink]="[ '/productDetail', item.id]" class="btn btn-outline-secondary">Detail</a>
                 </td>
             </tr>
         }
@@ -38,7 +38,8 @@
                 <div class="modal-body">
                     @if (singleProduct) {
                         <img src={{singleProduct.images[0]}} class="img-fluid" />
-                        <h3><span class="badge text-bg-warning">{{ singleProduct.price }}</span></h3>
+                        <h3><span class="badge text-bg-dark text-decoration-line-through">{{ singleProduct.price }}</span>&nbsp;<span class="badge text-bg-warning">{{ singleProduct.price }}</span></h3>
+                        <span class="badge text-bg-secondary">{{singleProduct.tags[0]}} / {{singleProduct.tags[1]}}</span>
                     }
                 </div>
                 <div class="modal-footer">
